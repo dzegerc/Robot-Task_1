@@ -1,6 +1,11 @@
 *** Settings ***
 Library    SeleniumLibrary
-Resource    ../Variables.resource
+
+*** Variables ***
+${EMAIL_INPUT_LOGIN} =           xpath=//*[@id="form"]/div/div/div[1]/div/form/input[2]
+${PASSWORD_INPUT_LOGIN} =        xpath=//*[@id="form"]/div/div/div[1]/div/form/input[3]
+${LOGIN_BUTTON} =                xpath=//*[@id="form"]/div/div/div[1]/div/form/button
+
 
 *** Keywords ***
 Login User 
@@ -8,7 +13,6 @@ Login User
     Fill "EmailAddress" field    ${EmailAddress}
     Fill "Password" Field        ${Password}
     Click "Login" Button
-
 
 
 

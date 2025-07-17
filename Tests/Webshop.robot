@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation    Automation testing example for website: Automation Exercise 
-Resource         ../Resources/Common.resource
+Resource         ../Resources/Common/Common.resource
 Resource         ../Resources/WebshopApp.resource
 Task Setup       Begin Web Test
 Test Teardown    End Web Test
@@ -111,5 +111,13 @@ Start Signup Process With Empty Field
     WebshopApp."Signup/Login" Loaded
     WebshopApp.Signup With Empty Field    ${user}
 
-
-
+Signup Process With Empty Field Negativ Scenario
+    [Documentation]    Test case for first step for signup new user EMPTY FIELD
+    [Tags]              Test 10
+    ${user}=    Generate Random User Data
+    WebshopApp.Go To Landing Page
+    WebshopApp.Landing Page Loaded Successfully
+    WebshopApp.Go To "Signup/Login" page
+    WebshopApp."Signup/Login" Loaded
+    WebshopApp.Main Page "Signup"    ${user}
+    WebshopApp.Signup With Empty Field    ${user}

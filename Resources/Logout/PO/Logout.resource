@@ -1,6 +1,11 @@
 *** Settings ***
 Library    SeleniumLibrary
-Resource    ../Variables.resource
+
+
+*** Variables ***
+${LOGOUT_LINK} =                 xpath=//*[@id="header"]/div/div/div/div[2]/div/ul/li[4]/a
+${VERIFY_LOGIN_TEXT} =           xpath=//*[@id="form"]/div/div/div[1]/div/h2
+${VERIFY_SIGNUP_TEXT} =          xpath=//*[@id="form"]/div/div/div[3]/div/h2
 
 
 *** Keywords ***

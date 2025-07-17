@@ -1,6 +1,6 @@
 *** Settings ***
 Library     SeleniumLibrary
-Resource    ./Variables.resource
+Resource    ./Landing.resource
 
 *** Keywords ***
 Begin Web Test

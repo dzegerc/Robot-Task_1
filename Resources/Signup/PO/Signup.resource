@@ -1,13 +1,13 @@
 *** Settings ***
 Library    SeleniumLibrary
-Resource    ../Variables.resource
-Resource    ./Keywords.resource
+
+Resource    ./SignupKeyword.resource
 
 *** Variables ***
-@{REQUIRED_FIELDS}    ${NAME_INPUT_SIGNUP}    ${EMAIL_INPUT_SIGNUP}    ${PASSWORD_FIELD}    ${FIRST_NAME_FIELD}    ${LAST_NAME_FIELD}    ${ADDRESS_INPUT}    ${STATE_FIELD}    ${CITY_FIELD}    ${ZIPCODE_FIELD}    ${MOBILE_NUMBER_FIELD}
 
 
 *** Keywords ***
+
 Signup Main Page
     [Arguments]    ${Name}    ${EmailAddress}
     Fill "Name" Field            ${Name}
@@ -28,6 +28,17 @@ Signup With Existing Email
     Fill "EmailAddress" Field            ${ExistingEmail}   
     Click "Signup" Button
     Error Message Should Be Displayed    Email Address already exist!
+
+    
+Negative Tests For All Required Fields
+    [Arguments]    ${user}
+    FOR    ${field}    IN    @{REQUIRED_FIELDS}
+    Log    Testing with missing field: ${field}
+    Fill New User Details    ${user}    ${field}
+    Click "Create Account" Button
+    Page Should Not Contain Element    ${ACCOUNT_CREATED_TEXT}
+    END
+    
     
 
 New User Created Successfully
@@ -50,26 +61,41 @@ Click "Signup" Button
     Click Button                 ${SIGNUP_BUTTON}
 
 Fill New User Details
-    [Arguments]    ${user}
+    [Arguments]    ${user}    ${empty_field}=NONE  
     Click Element                ${TITLE_MRS_SELECT}
-    Input Text                   ${PASSWORD_FIELD}    ${user["PASSWORD"]}
+    IF    $empty_field != "PASSWORD"
+        Input Text                   ${PASSWORD_FIELD}    ${user["PASSWORD"]}
+    END
     Scroll Element Into View     ${DAY_SELECT}
     Select From List By Value    ${DAY_SELECT}        ${user["DAY"]}
     Scroll Element Into View     ${MONTH_SELECT}
     Select From List By Value    ${MONTH_SELECT}      ${user["MONTH"]}
     Scroll Element Into View     ${YEAR_SELECT}
     Select From List By Value    ${YEAR_SELECT}       ${user["YEAR"]}
-    Input Text                   ${FIRST_NAME_FIELD}  ${user["NAME"]}
-    Input Text                   ${LAST_NAME_FIELD}   ${user["LASTNAME"]}
-    Input Text                   ${ADDRESS_INPUT}     ${user["ADDRESS"]}
-    Select From List By Value    ${SELECT_COUNTRY}    ${user["COUNTRY"]} 
-    Input Text                   ${STATE_FIELD}       ${user["STATE"]}
-    Input Text                   ${CITY_FIELD}        ${user["CITY"]}
-    Input Text                   ${ZIPCODE_FIELD}     ${user["ZIPCODE"]}
-    Input Text                   ${MOBILE_NUMBER_FIELD}    ${user["MOBILE"]}
+    IF    $empty_field != "NAME"
+        Input Text                   ${FIRST_NAME_FIELD}  ${user["NAME"]}
+    END
+    IF    $empty_field != "LASTNAME"
+        Input Text                   ${LAST_NAME_FIELD}   ${user["LASTNAME"]}
+    END
+    IF    $empty_field != "ADDRESS"
+        Input Text                   ${ADDRESS_INPUT}     ${user["ADDRESS"]}
+    END
+    Select From List By Value    ${SELECT_COUNTRY}    ${user["COUNTRY"]}
+    IF    $empty_field != "STATE"
+        Input Text                   ${STATE_FIELD}       ${user["STATE"]}
+    END
+    IF    $empty_field != "CITY"
+        Input Text                   ${CITY_FIELD}        ${user["CITY"]}
+    END
+    IF    $empty_field != "ZIPCODE"
+        Input Text                   ${ZIPCODE_FIELD}     ${user["ZIPCODE"]}
+    END 
+    IF    $empty_field != "MOBILE"
+        Input Text                   ${MOBILE_NUMBER_FIELD}    ${user["MOBILE"]}
+    END
 
 
- 
 Click "Create Account" Button
     Scroll Element Into View    ${CREATE_ACC_BUTTON}
     Sleep    2s
@@ -89,13 +115,7 @@ Display of New User
      Element Text Should Be           ${EMAIL_EXIST_TEXT}    ${ExpectedMessage}
 
 
-Negative Tests For Required Fields
-    [Arguments]    ${user}
-    Input Text    ${EMAIL_INPUT_SIGNUP}   ${user["EMAIL"]}
-    Click Button  ${SIGNUP_BUTTON}
-    Element Should Be Visible    ${NAME_INPUT_SIGNUP}
-    
-    
+
     
 
 

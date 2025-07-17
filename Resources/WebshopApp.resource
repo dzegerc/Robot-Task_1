@@ -1,10 +1,11 @@
 *** Settings ***
+
 Resource    ./PO/Landing.resource
-Resource    ./PO/TopNav.resource
-Resource    ./PO/Signup.resource
-Resource    ./PO/Login.resource
-Resource    ./PO/Logout.resource
-Resource    ./PO/DeleteAccount.resource
+Resource    ./Signup/PO/Signup.resource
+Resource    ./Signup/PO/TopNavSignup.resource
+Resource    ./Login/PO/Login.resource
+Resource    ./Logout/PO/Logout.resource
+Resource    ./DeleteAccount/PO/DeleteAccount.resource
 
 
 
@@ -16,10 +17,10 @@ Landing Page Loaded Successfully
     Landing.Verify Page Loaded
 
 Go To "Signup/Login" page
-    TopNav.Select "Signup/Login" Page
+    TopNavSignup.Select "Signup/Login" Page
 
 "Signup/Login" Loaded
-    TopNav.Page "Signup/Login" Load Successfully
+    TopNavSignup.Page "Signup/Login" Load Successfully
 
 Main Page "Signup"
    [Arguments]    ${user}
@@ -57,7 +58,7 @@ Delete User Account
 
 Signup With Empty Field
     [Arguments]    ${user}
-    Signup.Negative Tests For Required Fields    ${user}
+    Signup.Negative Tests For All Required Fields    ${user}
 
 
     
