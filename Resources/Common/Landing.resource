@@ -1,5 +1,6 @@
 *** Settings ***
 Library     SeleniumLibrary
+Resource    ../ClickActions/ClickActionsApp.resource
 
 
 *** Variables ***
@@ -13,7 +14,6 @@ ${VERIFY_LANDING_PAGE_TEXT} =    xpath=//*[@id="header"]/div/div/div/div[1]/div/
 *** Keywords ***
 Navigate To
     Go To    ${URL}
+    Click Element By Locator                       ${CONSENT_TEXT}
+    Wait Until Page Contains Element               ${VERIFY_LANDING_PAGE_TEXT}    
 
-Verify Page Loaded
-    Click Element                       ${CONSENT_TEXT}
-    Wait Until Page Contains Element    ${VERIFY_LANDING_PAGE_TEXT}    
