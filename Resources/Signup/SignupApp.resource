@@ -33,9 +33,9 @@ Filling in The Details Fields
     Select Day Element                  ${user}
     Select Month Element                ${user}
     Select Year Element                 ${user}
-    Input First Name Field              ${user}
-    Input Last Name Field               ${user}
-    Input Addres Element                ${user}
+    Input First Name Element            ${user}
+    Input Last Name Element             ${user}
+    Input Address Element               ${user}
     Select Country Element              ${user}
     Input State Element                 ${user}
     Input City Element                  ${user}
@@ -52,10 +52,43 @@ Account Was Successfully Created
     Account Created Successfully
     Continue to User Home Page
     
-
 User Should be Logged
     [Arguments]       ${user}
     User Should Be Logged In As         ${user}
+
+Skip Name or/and Email Field from Signup page
+    [Arguments]     ${user}    ${skip_field}=NONE
+    Run Keyword If    '${user["NAME"]}' != ''     Input Name Element             ${user["NAME"]}
+    Run Keyword If    '${user["EMAIL"]}' != ''    Input EmailAddress Element     ${user["EMAIL"]}
+
+
+Check the User not Redirect to Detail Page
+    Element Should Not Be Visible    ${SIGNUP_DETAIL_PAGE_TEXT}
+
+
+Fill Signup Detail Form With Optional Skip Field
+    [Arguments]    ${user}    ${skip_field}=NONE
+     Select Title Element
+    Run Keyword If          '${skip_field}' != ''        Input Password Eelement        ${user}
+    Select Day Element       ${user}
+    Select Month Element     ${user}
+    Select Year Element      ${user}
+    Run Keyword If          '${skip_field}' != ''        Input First Name Element       ${user}
+    Run Keyword If          '${skip_field}' != ''        Input Last Name Element        ${user}
+    Run Keyword If          '${skip_field}' != ''        Input Address Element          ${user}
+    Select Country Element   ${user}
+    Run Keyword If          '${skip_field}' != ''        Input State Element            ${user}
+    Run Keyword If          '${skip_field}' != ''        Input City Element             ${user}
+    Run Keyword If          '${skip_field}' != ''        Input Zipcode Element          ${user}
+    Run Keyword If          '${skip_field}' != ''        Input Mobile Number Element    ${user}
+
+
+Check the User not Redirect to Account Created Page
+    Element Should Not Be Visible    ${ACCOUNT_CREATED_TEXT}
+
+    
+
+
 
 
 

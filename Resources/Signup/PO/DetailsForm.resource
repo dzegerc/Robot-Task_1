@@ -27,16 +27,16 @@ Select Year Element
     [Arguments]    ${user}
     Select Element from Dropdown    ${YEAR_SELECT}       ${user["YEAR"]}
 
-Input First Name Field
+Input First Name Element
     [Arguments]    ${user}
     Input Text Element              ${FIRST_NAME_FIELD}  ${user["NAME"]}
 
 
-Input Last Name Field
+Input Last Name Element
     [Arguments]    ${user}
     Input Text Element              ${LAST_NAME_FIELD}   ${user["LASTNAME"]}
 
-Input Addres Element
+Input Address Element
     [Arguments]    ${user}
     Input Text Element               ${ADDRESS_INPUT}     ${user["ADDRESS"]}
 

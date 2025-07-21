@@ -6,8 +6,8 @@ Library    Collections
 
 *** Variables ***
 #@{REQUIRED_FIELDS}    ${NAME_INPUT_SIGNUP}    ${EMAIL_INPUT_SIGNUP}    ${PASSWORD_FIELD}    ${FIRST_NAME_FIELD}    ${LAST_NAME_FIELD}    ${ADDRESS_INPUT}    ${STATE_FIELD}    ${CITY_FIELD}    ${ZIPCODE_FIELD}    ${MOBILE_NUMBER_FIELD}
-@{REQUIRED_FIELDS}    NAME    EMAIL    PASSWORD    FIRSTNAME    LASTNAME    ADDRESS    STATE    CITY    ZIPCODE    MOBILE
 #lista mora uključivati ključeve iz dictionary-a, a ne elemente koje sam definirala u varijablama
+
 
 ${NAME_INPUT_SIGNUP} =           xpath=//*[@id="form"]/div/div/div[3]/div/form/input[2]
 ${EMAIL_INPUT_SIGNUP} =          xpath=//*[@id="form"]/div/div/div[3]/div/form/input[3]
@@ -26,11 +26,13 @@ ${CITY_FIELD} =                  xpath=//*[@id="city"]
 ${ZIPCODE_FIELD} =               xpath=//*[@id="zipcode"]
 ${MOBILE_NUMBER_FIELD} =         xpath=//*[@id="mobile_number"]
 ${SIGNUP_BUTTON} =               xpath=//*[@id="form"]/div/div/div[3]/div/form/button
+${EXISTING_EMAIL} =              test@test.com
 ${EMAIL_EXIST_TEXT} =            xpath=//p[text()='Email Address already exist!']
 ${CREATE_ACC_BUTTON} =           xpath=//*[@id="form"]/div/div/div/div[1]/form/button
 ${ACCOUNT_CREATED_TEXT} =        xpath=//*[@id="form"]/div/div/div/h2/b
 ${CONTINUE_LINK} =               xpath=//*[@id="form"]/div/div/div/div/a
-${SIGNUP_DETAIL_PAGE_TEXT} =     xpath= //*[@id="form"]/div/div/div/div[1]/h2/b
+${SIGNUP_DETAIL_PAGE_TEXT} =     xpath=//*[@id="form"]/div/div/div/div[1]/h2/b
+${VERIFY_DETAIL_PAGE} =          xpath=//*[@id="form"]/div/div/div/div[1]/form/h2/b
 
 
 
