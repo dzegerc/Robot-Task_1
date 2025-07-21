@@ -11,19 +11,21 @@ Test Teardown    End Web Test
 Navigate from Landing Page and Complete First Step of Signup
     [Documentation]    Test case for loading landing page and navigate to Signup and login page
     [Tags]             Test 1
-    Go To Signup/Login page
-    Submit Signup Form with Valid Data         ${user}
+    SignupApp.Go To Signup/Login page
+    SignupApp.Submit Signup Form with Valid Data      ${user} 
+    
    
 
 User Can Sign Up Successfully
     [Documentation]      Test case for completing the registration of a new user
     [Tags]               Test 2
-    Go To Signup/Login page
-    Submit Signup Form with Valid Data          ${user}
-    User Redirected to Signup Detail Page
-    Complete Signup With Valid Details          ${user}
-    Account Was Successfully Created            ${user}
-    User Should be Logged                       ${user}
+    SignupApp.Go To Signup/Login page
+    SignupApp.Submit Signup Form with Valid Data      ${user} 
+    SignupApp.User Redirected to Signup Detail Page
+    SignupApp.Complete Signup With Valid Details      ${user}
+    SignupApp.Account Was Successfully Created        ${user}
+    SignupApp.User Should be Logged                   ${user}
+   
 
     
 

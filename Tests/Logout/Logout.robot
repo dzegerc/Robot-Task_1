@@ -7,5 +7,5 @@ Test Teardown    End Web Test
 
 *** Test Cases ***
 Logout User Process
-    User Logout
-    User Has Been Successfully Logged Out
+    LogoutApp.User Logout
+    LogoutApp.User Has Been Successfully Logged Out

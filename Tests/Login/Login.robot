@@ -13,21 +13,18 @@ Test Teardown    End Web Test
 
 *** Test Cases ***
 Navigate from Landing Page to Login Page
-    Navigate To
-    Click Signup/Login Link
-    Page Signup/Login Load Successfully
+    SignupApp.Go To Signup/Login page
 
 #stavljen je cijeli dio sa signup-om zbog toga što se moraju koristiti isti podaci od kreiranog korisnika (dok ne pronađem bolje rješenje)
 User Can Login Successfully
-    Navigate To
-    Click Signup/Login Link
-    Submit Signup Form with Valid Data          ${user}
-    User Redirected to Signup Detail Page
-    Complete Signup With Valid Details          ${user}
-    Account Was Successfully Created            ${user}
-    User Logout
-    User Has Been Successfully Logged Out
-    Submit Valid Login Data                     ${user}
+    SignupApp.Go To Signup/Login page
+    SignupApp.Submit Signup Form with Valid Data    ${user}
+    SignupApp.User Redirected to Signup Detail Page
+    SignupApp.Complete Signup With Valid Details    ${user}
+    SignupApp.Account Was Successfully Created      ${user}
+    LogoutApp.User Logout
+    LogoutApp.User Has Been Successfully Logged Out
+    LoginApp.Submit Valid Login Data                ${user}
 
     
     

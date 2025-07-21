@@ -2,11 +2,13 @@
 Library    SeleniumLibrary
 Resource    ./PO/EmailAndPasswordForm.resource
 Resource    ./PO/LoginClickElement.resource
+Resource    ../Signup/PO/SignupKeyword.resource
 
 
 *** Variables ***
 ${INCORRECT_MESSAGE} =    xpath=//*[@id="form"]/div/div/div[1]/div/form/p
 ${VERIFY_LOGIN_TEXT} =           xpath=//*[@id="form"]/div/div/div[1]/div/h2
+@{REQUIRED_FIELDS}    EMAIL    PASSWORD 
 
 
 *** Keywords ***
@@ -20,6 +22,16 @@ Input Valid Email and Password Data
     [Arguments]      ${emailAddress}     ${password}
     EmailAndPasswordForm.Input EmailAddress Element     ${emailAddress}  
     EmailAndPasswordForm.Input Password Element        ${password}
+
+Validate Empty Login Fields
+    [Arguments]    ${user}    ${field}
+    ${user_copy}=    Copy Dictionary    ${user}
+    Set To Dictionary    ${user_copy}    ${field}        ${EMPTY}
+    Skip Email or/and Password Field from Login page     ${user_copy}
+    Click Login Element
+    Sleep    2s
+    Checking Keeps the User on the Current Page
+    Reload Page
 
 
 Skip Email or/and Password Field from Login page

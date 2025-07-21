@@ -13,18 +13,17 @@ Test Teardown    End Web Test
 Delete User Account 
     [Documentation]      Test case for delete user account and rediretct to home page, checking the account has been deleted
     [Tags]               Test 1
-    Go To Signup/Login page
-    Submit Signup Form with Valid Data          ${user}
-    User Redirected to Signup Detail Page
-    Complete Signup With Valid Details          ${user}
-    Account Was Successfully Created            ${user}
-    User Should be Logged                       ${user}
-    Delete Account
-    Navigate to Home Page After Succesful Deleting
-    Click Signup/Login Link
-    Submit Valid Login Data                     ${user}
-    Verify Deleted Account
-
+    SignupApp.Go To Signup/Login page
+    SignupApp.Submit Signup Form with Valid Data    ${user}
+    SignupApp.User Redirected to Signup Detail Page
+    SignupApp.Complete Signup With Valid Details    ${user}
+    SignupApp.Account Was Successfully Created      ${user}
+    SignupApp.User Should be Logged                 ${user}
+    DeleteAccountApp.Delete Account
+    DeleteAccountApp.Navigate to Home Page After Succesful Deleting
+    SignupApp.Go To Signup/Login page
+    LoginApp.Submit Valid Login Data                ${user}
+    DeleteAccountApp.Verify Deleted Account
 
 
 

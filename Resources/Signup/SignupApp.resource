@@ -7,6 +7,11 @@ Resource       ./PO/NameAndEmailForm.resource
 Resource       ./PO/DetailsForm.resource
 Resource       ./PO/UserLoggedInAs.resource
 
+*** Variables ***
+@{REQUIRED_FIELDS}               PASSWORD    NAME     LASTNAME    ADDRESS    STATE    CITY    ZIPCODE    MOBILE
+@{REQUIRED_FIELDS_FIRST_STEP}    NAME    EMAIL
+
+
 *** Keywords ***
 Go To Signup/Login page
     Navigate To
@@ -61,14 +66,34 @@ Skip Name or/and Email Field from Signup page
     Run Keyword If    '${user["NAME"]}' != ''     Input Name Element             ${user["NAME"]}
     Run Keyword If    '${user["EMAIL"]}' != ''    Input EmailAddress Element     ${user["EMAIL"]}
 
+Validate Missing Field In First Step
+    [Arguments]    ${user}    ${missing_field}
+    ${user_copy}=    Copy Dictionary    ${user}
+    Set To Dictionary    ${user_copy}    ${missing_field}    ${EMPTY}
+    Skip Name or/and Email Field from Signup page    ${user_copy}
+    Click Signup Element
+    Sleep    2s
+    Check the User not Redirect to Detail Page
+    Reload Page
 
 Check the User not Redirect to Detail Page
     Element Should Not Be Visible    ${SIGNUP_DETAIL_PAGE_TEXT}
 
+Validate Missing Field In Signup Detail Form
+    [Arguments]    ${user}    ${missing_field}
+    Log    Testing missing field: ${missing_field}
+    ${user_copy}=    Copy Dictionary    ${user}
+    Set To Dictionary    ${user_copy}    ${missing_field}    ${EMPTY}
+    Fill Signup Detail Form With Optional Skip Field    ${user_copy}    ${missing_field}
+    Click Create Account Element
+    Check the User not Redirect to Account Created Page
+    Reload Page
+
+
 
 Fill Signup Detail Form With Optional Skip Field
     [Arguments]    ${user}    ${skip_field}=NONE
-     Select Title Element
+    Select Title Element
     Run Keyword If          '${skip_field}' != ''        Input Password Eelement        ${user}
     Select Day Element       ${user}
     Select Month Element     ${user}
@@ -81,6 +106,7 @@ Fill Signup Detail Form With Optional Skip Field
     Run Keyword If          '${skip_field}' != ''        Input City Element             ${user}
     Run Keyword If          '${skip_field}' != ''        Input Zipcode Element          ${user}
     Run Keyword If          '${skip_field}' != ''        Input Mobile Number Element    ${user}
+
 
 
 Check the User not Redirect to Account Created Page
