@@ -14,7 +14,7 @@ Resource       ./PO/UserLoggedInAs.resource
 
 *** Keywords ***
 Go To Signup/Login page
-    Navigate To
+    Navigate To Home Page
     Click Signup/Login Link
     Page Signup/Login Load Successfully
 

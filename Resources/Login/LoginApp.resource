@@ -9,6 +9,9 @@ Resource    ../Signup/PO/SignupKeyword.resource
 ${INCORRECT_MESSAGE} =    xpath=//*[@id="form"]/div/div/div[1]/div/form/p
 ${VERIFY_LOGIN_TEXT} =           xpath=//*[@id="form"]/div/div/div[1]/div/h2
 @{REQUIRED_FIELDS}    EMAIL    PASSWORD 
+#test data
+${VALID_EMAIL}=    edvin@edvin.com
+${VALID_PASSWORD}=    123
 
 
 *** Keywords ***
@@ -27,16 +30,16 @@ Validate Empty Login Fields
     [Arguments]    ${user}    ${field}
     ${user_copy}=    Copy Dictionary    ${user}
     Set To Dictionary    ${user_copy}    ${field}        ${EMPTY}
-    Skip Email or/and Password Field from Login page     ${user_copy}
+    Fill Login Form With Optional Fields                 ${user_copy}
     Click Login Element
     Sleep    2s
     Checking Keeps the User on the Current Page
     Reload Page
 
 
-Skip Email or/and Password Field from Login page
+Fill Login Form With Optional Fields
     [Documentation]      Checking required fields for entering email address and password
-    [Arguments]     ${user}    ${skip_field}=NONE
+    [Arguments]     ${user} 
     Run Keyword If    '${user["EMAIL"]}' !=''       EmailAndPasswordForm.Input EmailAddress Element     ${user["EMAIL"]}
     Run Keyword If    '${user["PASSWORD"]}' !=''    Input Password Element         ${user["PASSWORD"]}           
 
@@ -51,6 +54,15 @@ Input Invalid Login Credentials
 
 Verify Login Error Message Is Displayed
     Wait Until Element Is Enabled    ${INCORRECT_MESSAGE}
+
+        [Arguments]    ${user}
+    FOR    ${field}    IN    @{REQUIRED_FIELDS}
+        Validate Empty Login Fields   ${user}   ${field}
+    END
+
+Login Process With Exist User 
+    Input Valid Email and Password Data    ${VALID_EMAIL}    ${VALID_PASSWORD}
+    Click Login Element
 
 
 

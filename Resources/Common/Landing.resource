@@ -12,7 +12,7 @@ ${VERIFY_LANDING_PAGE_TEXT} =    xpath=//*[@id="header"]/div/div/div/div[1]/div/
 
 
 *** Keywords ***
-Navigate To
+Navigate To Home Page
     Go To    ${URL}
     Click Element By Locator                       ${CONSENT_TEXT}
     Wait Until Page Contains Element               ${VERIFY_LANDING_PAGE_TEXT}    
