@@ -2,76 +2,69 @@
 Library    SeleniumLibrary
 Resource    ../ClickActions/ClickActionsApp.resource
 Resource    ../Common/CommonKeywords.resource
-Resource    ./PO/PaymentForm.resource
-
-
-*** Variables ***
-${PRODUCTS_LINK} =                xpath=//*[@id="header"]/div/div/div/div[2]/div/ul/li[2]/a
-${PRODUCT_PAGE_TEXT}=             xpath=/html/body/section[2]/div/div/div[2]/div/h2
-${ARTICLE} =                      xpath=/html/body/section[2]/div[1]/div/div[2]/div/div[3]/div/div[1]/div[1]
-${ADD_TO_CART_BUTOTN}=            xpath=/html/body/section[2]/div[1]/div/div[2]/div/div[3]/div/div[1]/div[1]/a
-${SUCCESSFUL_ADDED_TEXT}=         xpath=//*[@id="cartModal"]/div/div/div[1]/h4
-${VIEW_CART_LINK}=                xpath=//*[@id="cartModal"]/div/div/div[2]/p[2]/a
-${SHOPPING_CART_LOADED}=          xpath=//*[@id="cart_items"]/div/div[1]/ol
-${PROCEED_TO_CHECKOUT_BUTTON} =   xpath=//*[@id="do_action"]/div[1]/div/div/a
-${UNABLE_TO_CONTINUE}=            xpath=//*[@id="checkoutModal"]/div/div/div[2]/p[1]
-${REVIEW_ORDER_TEXT}=             xpath=//*[@id="cart_items"]/div/div[4]/h2
-${PLACE_ORDER_BUTTON}=            xpath=//*[@id="cart_items"]/div/div[7]/a
-${PAYMENT_PAGE_TEXT}=             xpath=//*[@id="cart_items"]/div/div[2]/h2
-${ORDER_PLACED_TEXT}=             xpath=//*[@id="form"]/div/div/div/h2/b
-${CONTINUE_ORDER_BUTTON}=         xpath=//*[@id="form"]/div/div/div/div/a
-${HOME_PAGE_CHECK}=               xpath=//*[@id="header"]/div/div/div/div[1]/div/a/img
-${PAY_CONFIRM_BUTTON}=            xpath=//*[@id="submit"]
+Resource    ./PO/Click_Product_Link.resource
+Resource    ./PO/Payment_Form.resource
+Resource    ./PO/Product_Page_Text_Loaded.resource
+Resource    ./PO/Add_To_Cart_Button.resource
+Resource    ./PO/Mouse_Over_Article.resource
+Resource    ./PO/Click_Add_To_Card_Hover.resource
+Resource    ./PO/Cart_Success_Message.resource
+Resource    ./PO/Page_Scroll.resource
+Resource    ./PO/Click_View_Link.resource
+Resource    ./PO/Shopping_Cart_Loaded.resource
+Resource    ./PO/Click_Proceed_To_Checkout.resource
+Resource    ./PO/Need_Register_Login_Message.resource
+Resource    ./PO/Review_Order_Section.resource
+Resource    ./PO/Click_Place_Order_Button.resource
+Resource    ./PO/Payment_Page_Loaded.resource
+Resource    ./PO/Click_Pay_Confirm_Button.resource
+Resource    ./PO/Order_Confirmation_Page_Loaded.resource
+Resource    ./PO/Click_Continue_Order_Button.resource
+Resource    ./PO/Home_Page_Loaded.resource
 
 
 *** Keywords ***
 Navigate To Products Page
-    ClickActionsApp.Click Element By Locator    ${PRODUCTS_LINK}
-    Wait Until Element Is Enabled               ${PRODUCT_PAGE_TEXT}
+    Click_Product_Link.Click Product Nav Link
+    Product_Page_Text_Loaded.Wait Until Product Page Enabled     
 
 Add Item To Cart
     [Documentation]    Adding first article to cart
-    Scroll Element Into View                    ${ARTICLE}
-    Mouse Over                                  ${ARTICLE}
-    Sleep    1s
-    Execute JavaScript          document.querySelector('a[data-product-id="2"]').click()
-    Wait Until Element Is Enabled               ${SUCCESSFUL_ADDED_TEXT}
+    Add_To_Cart_Button.Scroll To Add To Cart Button
+    Page_Scroll.Scroll Through The Page
+    Mouse_Over_Article.Hover From The Article
+    Click_Add_To_Card_Hover.Click Hover Add To Cart Button
+    Cart_Success_Message.Wait For Successful Add To Cart Message
 
 Redirect To Shopping Cart Page
     [Documentation]    User was successfully redirect to shopping cart page with selected articles
-    Wait Until Element Is Enabled               ${VIEW_CART_LINK}
-    ClickActionsApp.Click Element By Locator    ${VIEW_CART_LINK}
-    Wait Until Element Is Enabled               ${SHOPPING_CART_LOADED}
+    Click_View_Link.Click View Cart Link
+    Shopping_Cart_Loaded.Wait For Shopping Cart To Load Successfully
 
-Proceed To Checkout With Negative Output
+Unlogged User Cannot Proceed To Checkout
     [Documentation]    Click to buttom for checkout, this step must indicate that the user must first log in to website
-    ClickActionsApp.Click Element By Locator    ${PROCEED_TO_CHECKOUT_BUTTON}
-    Wait Until Element Is Enabled               ${UNABLE_TO_CONTINUE}
+    Click_Proceed_To_Checkout.Click Proceed To Checkout Button
+    Need_Register_Login_Message.Verify Checkout Blocked For Unlogged User
 
-Procees To Checkout and Finish Payment
+Complete Checkout And Payment As Login User
     [Documentation]  The logged in user can continue oredring and payig for products in the cart
-    ClickActionsApp.Click Element By Locator    ${PROCEED_TO_CHECKOUT_BUTTON}
-    Scroll Element Into View                    ${REVIEW_ORDER_TEXT}
-    Scroll Element Into View                    ${PLACE_ORDER_BUTTON}
-    Wait Until Element Is Enabled               ${PLACE_ORDER_BUTTON}
-    ClickActionsApp.Click Element By Locator    ${PLACE_ORDER_BUTTON}
-    Wait Until Element Is Enabled               ${PAYMENT_PAGE_TEXT}
-    Fill Payment Fied
-    ClickActionsApp.Click Element By Locator    ${PAY_CONFIRM_BUTTON}
-    Wait Until Element Is Enabled               ${ORDER_PLACED_TEXT}
+    Click_Proceed_To_Checkout.Click Proceed To Checkout Button
+    Review_Order_Section.Scroll To Review Your Order Section
+    Page_Scroll.Scroll Through The Page
+    Click_Place_Order_Button.Click Place Order Button
+    Payment_Page_Loaded.Wait For Payment Page To Load Successfully
+    Payment_Form.Fill Payment Fied
+    Page_Scroll.Scroll Through The Page
+    Click_Pay_Confirm_Button.Click Pay And Confirm Order Button
+    Order_Confirmation_Page_Loaded.Wait To Order Placed Page Load Successfully
+
 
 Successfully Redirect User to Home Page After Ordered
-    Wait Until Element Is Enabled               ${CONTINUE_ORDER_BUTTON}
-    ClickActionsApp.Click Element By Locator    ${CONTINUE_ORDER_BUTTON}
-    Wait Until Element Is Enabled               ${HOME_PAGE_CHECK}
+    Click_Continue_Order_Button.Click To Continue Order Button
+    Home_Page_Loaded.Wait Until Home Page Loaded Successfully
 
     
-Fill Payment Fied
-    PaymentForm.Input Name Card Element    
-    PaymentForm.Input Card Number Element
-    PaymentForm.Input CVC Element
-    PaymentForm.Input Expiration Mont Element
-    PaymentForm.Input Expiration Year Element
+
     
     
 

@@ -4,11 +4,11 @@ Resource    ../../Common/CommonKeywords.resource
 
 *** Variables ***
 #payment inf field and test data
-${CARD_NAME_FIELD}=               xpath=//*[@id="payment-form"]/div[1]/div/input
-${CARD_NUMBER_FIELD}=             xpath=//*[@id="payment-form"]/div[2]/div/input
-${CVC_FIELD}=                     xpath=//*[@id="payment-form"]/div[3]/div[1]/input
-${EXPIRATION_MONTH_FIELD}=        xpath=//*[@id="payment-form"]/div[3]/div[2]/input
-${EXPIRATION_YEAR_FIELD}=         xpath=//*[@id="payment-form"]/div[3]/div[3]/input 
+${CARD_NAME_FIELD}=               xpath=//input[@ name='name_on_card']
+${CARD_NUMBER_FIELD}=             xpath=//input[@ name='card_number']
+${CVC_FIELD}=                     xpath=//input[@ name='cvc']
+${EXPIRATION_MONTH_FIELD}=        xpath=//input[@ name='expiry_month']
+${EXPIRATION_YEAR_FIELD}=         xpath=//input[@ name='expiry_year']
 
 ${NAME_CARD}=    Edvin
 ${NUMBER_CARD}=  52687413965
@@ -32,3 +32,10 @@ Input Expiration Mont Element
 Input Expiration Year Element
     CommonKeywords.Input Text Element    ${EXPIRATION_YEAR_FIELD}     ${YEAR_EXP}
 
+    
+Fill Payment Fied
+   Input Name Card Element    
+   Input Card Number Element
+   Input CVC Element
+   Input Expiration Mont Element
+   Input Expiration Year Element

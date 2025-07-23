@@ -3,9 +3,9 @@ Documentation    Test cases for signup user on website
 Resource         ../../Resources/Common/Common.resource
 Resource         ../../Resources/Signup/SignupApp.resource
 Resource         ../../Resources/Common/SignupSuite.robot
-Suite Setup      Prepare Test User
-Task Setup       Begin Web Test
-Test Teardown    End Web Test
+Suite Setup      SignupSuite.Prepare Test User
+Task Setup       Common.Begin Web Test
+Test Teardown    Common.End Web Test
 
 *** Test Cases ***
 Navigate from Landing Page and Complete First Step of Signup

@@ -3,8 +3,8 @@ Resource         ../../Resources/AccessControl/AccessControlApp.resource
 Resource         ../../Resources/Signup/SignupApp.resource
 Resource         ../../Resources/Login/LoginApp.resource
 Resource         ../../Resources/Common/Common.resource
-Task Setup       Begin Web Test
-Test Teardown    End Web Test
+Task Setup       Common.Begin Web Test
+Test Teardown    Common.End Web Test
 
 
 *** Test Cases ***
@@ -14,7 +14,7 @@ Unlogged User Cannot Access Checkout From Cart
     AccessControlApp.Navigate To Products Page
     AccessControlApp.Add Item To Cart
     AccessControlApp.Redirect To Shopping Cart Page
-    AccessControlApp.Proceed To Checkout With Negative Output
+    AccessControlApp.Unlogged User Cannot Proceed To Checkout
 
 
 Logged User Can Access Checkout From Cart
@@ -24,7 +24,7 @@ Logged User Can Access Checkout From Cart
     AccessControlApp.Navigate To Products Page
     AccessControlApp.Add Item To Cart
     AccessControlApp.Redirect To Shopping Cart Page
-    AccessControlApp.Procees To Checkout and Finish Payment
+    AccessControlApp.Complete Checkout And Payment As Login User
     AccessControlApp.Successfully Redirect User to Home Page After Ordered
 
     
