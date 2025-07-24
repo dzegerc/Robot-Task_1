@@ -1,5 +1,5 @@
 *** Settings ***
-Resource       ../Signup/PO/GenerateUserData.resource
+Resource       ../Signup/GenerateUserData.resource
 
 *** Variables ***
 ${user}=    NONE

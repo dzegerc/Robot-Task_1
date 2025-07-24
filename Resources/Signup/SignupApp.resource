@@ -4,7 +4,7 @@ Resource       ./PO/SignupApp_PO.resource
 Resource       ../Common/Landing.resource
 Resource       ./PO/NameAndEmailForm.resource
 Resource       ./PO/DetailsForm.resource
-Resource       ./PO/GenerateUserData.resource
+Resource       ./GenerateUserData.resource
 
 
 *** Variables ***

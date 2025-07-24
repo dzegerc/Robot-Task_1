@@ -2,8 +2,7 @@
 Library     SeleniumLibrary
 Resource    ./PO/EmailAndPasswordForm.resource
 Resource    ./PO/LoginApp_PO.resource
-Resource    ../Signup/PO/GenerateUserData.resource
-
+Resource    ../Signup/GenerateUserData.resource
 
 *** Variables ***
 ${INCORRECT_MESSAGE} =    xpath=//*[@id="form"]/div/div/div[1]/div/form/p

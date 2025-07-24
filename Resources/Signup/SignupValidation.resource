@@ -1,6 +1,6 @@
 *** Settings *** 
 Library    SeleniumLibrary
-Resource    ../SignupApp.resource
+Resource    ../Signup/SignupApp.resource
 
 *** Keywords ***
 Prepare Signup Detail Page With Valid User
