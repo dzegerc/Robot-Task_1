@@ -1,17 +1,11 @@
 *** Settings ***
 Library    SeleniumLibrary
-Resource    ./PO/LogoutClickElement.resource
-
-
-*** Variables ***
-${VERIFY_LOGIN_TEXT} =           xpath=//*[@id="form"]/div/div/div[1]/div/h2
-${VERIFY_SIGNUP_TEXT} =          xpath=//*[@id="form"]/div/div/div[3]/div/h2
+Resource    ./PO/LogoutApp_PO.resource
 
 
 *** Keywords ***
 User Logout
-    LogoutClickElement.Click Logout Element
+    LogoutApp_PO.Click Logout Link
 
 User Has Been Successfully Logged Out 
-    Wait Until Element Is Enabled      ${VERIFY_LOGIN_TEXT}
-    Wait Until Element Is Enabled      ${VERIFY_SIGNUP_TEXT}
+    LogoutApp_PO.User Was Successfully Redirected To Login and Signup Page

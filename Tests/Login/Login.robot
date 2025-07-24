@@ -1,8 +1,6 @@
 *** Settings ***
 Documentation    Test cases for login user on website
 Resource         ../../Resources/Common/Common.resource
-Resource         ../../Resources/Signup/PO/ClickElement.resource
-Resource         ../../Resources/Signup/PO/UserLoggedInAs.resource
 Resource         ../../Resources/Login/LoginApp.resource
 Resource         ../../Resources/Signup/SignupApp.resource
 Resource         ../../Resources/Common/SignupSuite.robot

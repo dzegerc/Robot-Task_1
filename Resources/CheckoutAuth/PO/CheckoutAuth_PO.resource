@@ -14,7 +14,7 @@ ${SUCCESSFUL_ADDED_TEXT}=         xpath=//*[@id="cartModal"]/div/div/div[1]/h4
 ${VIEW_CART_LINK}=                xpath=//a[@href='/view_cart']//u[text()='View Cart']
 ${SHOPPING_CART_LOADED}=          xpath=//section[@id='cart_items']//li[text()='Shopping Cart']
 ${PROCEED_TO_CHECKOUT_BUTTON} =   xpath=//section[@id='do_action']//a[text()= 'Proceed To Checkout']
-${UNABLE_TO_CONTINUE}=            xpath=     //div[@id='checkoutModal']//p[text()='Register / Login account to proceed on checkout.']
+${UNABLE_TO_CONTINUE}=            xpath=//div[@id='checkoutModal']//p[text()='Register / Login account to proceed on checkout.']
 ${REVIEW_ORDER_TEXT}=             xpath=//div[@class='step-one']//h2[text()='Review Your Order']
 ${PLACE_ORDER_BUTTON}=            xpath=//a[text()='Place Order']
 ${PAYMENT_PAGE_TEXT}=             xpath=//h2[text()='Payment']

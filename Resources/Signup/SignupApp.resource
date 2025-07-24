@@ -1,65 +1,69 @@
 *** Settings ***
 Library        SeleniumLibrary
+Resource       ./PO/SignupApp_PO.resource
 Resource       ../Common/Landing.resource
-Resource       ./PO/SignupKeyword.resource
-Resource       ./PO/ClickElement.resource
 Resource       ./PO/NameAndEmailForm.resource
 Resource       ./PO/DetailsForm.resource
-Resource       ./PO/UserLoggedInAs.resource
+Resource       ./PO/GenerateUserData.resource
+
 
 *** Variables ***
-@{REQUIRED_FIELDS}               PASSWORD    NAME     LASTNAME    ADDRESS    STATE    CITY    ZIPCODE    MOBILE
 @{REQUIRED_FIELDS_FIRST_STEP}    NAME    EMAIL
+@{REQUIRED_FIELDS}               PASSWORD    NAME     LASTNAME    ADDRESS    STATE    CITY    ZIPCODE    MOBILE
+
 
 
 *** Keywords ***
 Go To Signup/Login page
-    Navigate To Home Page
-    Click Signup/Login Link
-    Page Signup/Login Load Successfully
+    Landing.Navigate To Home Page
+    SignupApp_PO.Click Signup/Login Link
+    SignupApp_PO.Signup Page Loaded Successfully
+
 
 Submit Signup Form with Valid Data
     [Arguments]    ${user}
-    Input Accepts Valid Name and Email        ${user["NAME"]}   ${user["EMAIL"]}
-    Click Signup Element
+    Input Accepts Valid Name and Email             ${user["NAME"]}   ${user["EMAIL"]}
+    SignupApp_PO.Click Signup Button
     
 Input Accepts Valid Name and Email
-    [Arguments]    ${name}    ${emailAddress}
+    [Arguments]                         ${name}    ${emailAddress}
     Input Name Element                             ${name}
     NameAndEmailForm.Input EmailAddress Element    ${emailAddress}
 
 User Redirected to Signup Detail Page
-    DetailsForm.Successful Redirection to the Signup Details Page  
+    SignupApp_PO.Successful Redirection To The Signup Details Page 
 
 Filling in The Details Fields
     [Arguments]        ${user}
-    Select Title Element
-    Input Password Eelement             ${user}
-    Select Day Element                  ${user}
-    Select Month Element                ${user}
-    Select Year Element                 ${user}
-    Input First Name Element            ${user}
-    Input Last Name Element             ${user}
-    Input Address Element               ${user}
-    Select Country Element              ${user}
-    Input State Element                 ${user}
-    Input City Element                  ${user}
-    Input Zipcode Element               ${user}
-    Input Mobile Number Element         ${user}
+    DetailsForm.Select Title Element
+    DetailsForm.Input Password Eelement            ${user}
+    DetailsForm.Select Day Element                 ${user}
+    DetailsForm.Select Month Element               ${user}
+    DetailsForm.Select Year Element                ${user}
+    DetailsForm.Input First Name Element           ${user}
+    DetailsForm.Input Last Name Element            ${user}
+    DetailsForm.Input Address Element              ${user}
+    DetailsForm.Select Country Element             ${user}
+    DetailsForm.Input State Element                ${user}
+    DetailsForm.Input City Element                 ${user}
+    DetailsForm.Input Zipcode Element              ${user}
+    DetailsForm.Input Mobile Number Element        ${user}
     
 Complete Signup With Valid Details
     [Arguments]       ${user}
-    Filling in The Details Fields       ${user}    
-    Click Create Account Element
+    Filling in The Details Fields                  ${user}    
+    SignupApp_PO.Click Create Account Element
 
 Account Was Successfully Created
     [Arguments]       ${user}
-    Account Created Successfully
-    Continue to User Home Page
+    SignupApp_PO.Account Created Successfully Message
+    SignupApp_PO.Click Continue Button
+
     
-User Should be Logged
-    [Arguments]       ${user}
-    User Should Be Logged In As         ${user}
+User Should Be Logged In As
+    [Arguments]    ${user}
+    SignupApp_PO.Checking The Currently Logged In User    ${user}
+
 
 Skip Name or/and Email Field from Signup page
     [Arguments]     ${user}    ${skip_field}=NONE
@@ -71,13 +75,13 @@ Validate Missing Field In First Step
     ${user_copy}=    Copy Dictionary    ${user}
     Set To Dictionary    ${user_copy}    ${missing_field}    ${EMPTY}
     Skip Name or/and Email Field from Signup page    ${user_copy}
-    Click Signup Element
+    SignupApp_PO.Click Signup Button
     Sleep    2s
-    Check the User not Redirect to Detail Page
+    SignupApp_PO.User Can Not Visible Signup Dteail Page
     Reload Page
 
-Check the User not Redirect to Detail Page
-    Element Should Not Be Visible    ${SIGNUP_DETAIL_PAGE_TEXT}
+
+   
 
 Validate Missing Field In Signup Detail Form
     [Arguments]    ${user}    ${missing_field}
@@ -85,8 +89,8 @@ Validate Missing Field In Signup Detail Form
     ${user_copy}=    Copy Dictionary    ${user}
     Set To Dictionary    ${user_copy}    ${missing_field}    ${EMPTY}
     Fill Signup Detail Form With Optional Skip Field    ${user_copy}    ${missing_field}
-    Click Create Account Element
-    Check the User not Redirect to Account Created Page
+    SignupApp_PO.Click Create Account Element
+    SignupApp_PO.Check The User Not Redirect To Account Created Page
     Reload Page
 
 
@@ -109,10 +113,11 @@ Fill Signup Detail Form With Optional Skip Field
 
 
 
-Check the User not Redirect to Account Created Page
-    Element Should Not Be Visible    ${ACCOUNT_CREATED_TEXT}
 
-    
+
+
+
+
 
 
 

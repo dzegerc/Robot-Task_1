@@ -4,15 +4,15 @@ Resource    ../../Common/CommonKeywords.resource
 
 
 *** Variables ***
-${EMAIL_INPUT_LOGIN} =           xpath=//*[@id="form"]/div/div/div[1]/div/form/input[2]
-${PASSWORD_INPUT_LOGIN} =        xpath=//*[@id="form"]/div/div/div[1]/div/form/input[3]
+${EMAIL_INPUT_LOGIN} =           xpath=//form[@action='/login']//input[@name='email']
+${PASSWORD_INPUT_LOGIN} =        xpath=//form[@action='/login']//input[@name='password']
 
 
 *** Keywords ***
 Input EmailAddress Element
-    [Arguments]       ${emailAddress}
-    Input Text Element    ${EMAIL_INPUT_LOGIN}    ${emailAddress}
+    [Arguments]           ${emailAddress}
+    Input Text Element    ${EMAIL_INPUT_LOGIN}       ${emailAddress}
     
 Input Password Element
-    [Arguments]       ${password}
+    [Arguments]           ${password}
     Input Text Element    ${PASSWORD_INPUT_LOGIN}    ${password}    

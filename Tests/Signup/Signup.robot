@@ -24,7 +24,8 @@ User Can Sign Up Successfully
     SignupApp.User Redirected to Signup Detail Page
     SignupApp.Complete Signup With Valid Details      ${user}
     SignupApp.Account Was Successfully Created        ${user}
-    SignupApp.User Should be Logged                   ${user}
+    SignupApp.User Should Be Logged In As             ${user}
+
    
 
     
