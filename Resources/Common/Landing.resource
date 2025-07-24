@@ -4,10 +4,10 @@ Resource    ../ClickActions/ClickActionsApp.resource
 
 
 *** Variables ***
-${BROWSER} =    edge
+${BROWSER} =                     edge
 ${URL} =                         https://automationexercise.com/  
-${CONSENT_TEXT}=                 xpath=/html/body/div/div[2]/div[2]/div[2]/div[2]/button[1]/p
-${VERIFY_LANDING_PAGE_TEXT} =    xpath=//*[@id="header"]/div/div/div/div[1]/div/a/img
+${CONSENT_TEXT}=                 xpath=//button[@class='fc-button fc-cta-consent fc-primary-button']//p[text()='Consent']
+${VERIFY_LANDING_PAGE_TEXT} =    xpath=//div[@class='logo pull-left']
 
 
 

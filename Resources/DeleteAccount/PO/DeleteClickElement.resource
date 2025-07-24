@@ -3,8 +3,8 @@ Library    SeleniumLibrary
 Resource    ../../ClickActions/ClickActionsApp.resource
 
 *** Variables ***
-${DELETE_ACCOUNT} =              xpath=//*[@id="header"]/div/div/div/div[2]/div/ul/li[5]/a
-${AFTER_DELETE_CONTINUE} =       xpath=//*[@id="form"]/div/div/div/div/a
+${DELETE_ACCOUNT} =              xpath=//a[@href='/delete_account' and text()=' Delete Account']
+${AFTER_DELETE_CONTINUE} =       xpath=//div[@class='pull-right']//a[text()='Continue']
 
 
 *** Keywords ***

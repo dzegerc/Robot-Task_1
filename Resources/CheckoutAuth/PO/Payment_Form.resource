@@ -32,10 +32,3 @@ Input Expiration Mont Element
 Input Expiration Year Element
     CommonKeywords.Input Text Element    ${EXPIRATION_YEAR_FIELD}     ${YEAR_EXP}
 
-    
-Fill Payment Fied
-   Input Name Card Element    
-   Input Card Number Element
-   Input CVC Element
-   Input Expiration Mont Element
-   Input Expiration Year Element

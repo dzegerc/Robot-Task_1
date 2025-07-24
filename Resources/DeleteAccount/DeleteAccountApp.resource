@@ -3,9 +3,9 @@ Library    SeleniumLibrary
 Resource    ./PO/DeleteClickElement.resource
 
 *** Variables ***
-${CONFIRM_DELETED_ACC} =         xpath=//*[@id="form"]/div/div/div/h2/b
-${VERIFY_LANDING_PAGE_TEXT} =    xpath=//*[@id="header"]/div/div/div/div[1]/div/a/img
-${VERIFY_DELETED_TEXT} =         xpath=//*[@id="form"]/div/div/div[1]/div/form/p
+${CONFIRM_DELETED_ACC} =         xpath=//b[text()='Account Deleted!']
+${VERIFY_LANDING_PAGE_TEXT} =    xpath=//div[@class='logo pull-left']
+${VERIFY_DELETED_TEXT} =         xpath=//p[text()='Your email or password is incorrect!']
  
 
 *** Keywords ***
